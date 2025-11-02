@@ -1,67 +1,156 @@
 "use client"
 
 import { useState } from "react"
-import { Star, Play, CheckCircle, Users, Trophy, Sparkles, ArrowRight, Clock, Target, Zap, Camera, Heart } from "lucide-react"
+import { Star, Play, CheckCircle, Users, Trophy, Sparkles, ArrowRight, Clock, Target, Zap, Camera, Heart, Menu, X } from "lucide-react"
 
 export default function NailCoursePage() {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
     <div className="min-h-screen bg-[#000000]">
+      {/* Header/Navbar */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[#000000]/90 backdrop-blur-sm border-b border-[#4F4F4F]/30">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo/Brand */}
+            <div className="flex items-center gap-4">
+              <div className="w-10 h-10 bg-gradient-to-r from-[#D3B8AE] to-[#EDE0D4] rounded-lg flex items-center justify-center">
+                <Sparkles className="w-6 h-6 text-[#000000]" />
+              </div>
+              <span className="text-xl font-bold text-[#FFFFFF]">NailTech Master</span>
+            </div>
+
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center gap-6">
+              <nav className="flex items-center gap-6">
+                <a href="#curso" className="text-[#EDE0D4] hover:text-[#D3B8AE] transition-colors">Curso</a>
+                <a href="#instrutora" className="text-[#EDE0D4] hover:text-[#D3B8AE] transition-colors">Instrutora</a>
+                <a href="#depoimentos" className="text-[#EDE0D4] hover:text-[#D3B8AE] transition-colors">Depoimentos</a>
+                <a href="#preco" className="text-[#EDE0D4] hover:text-[#D3B8AE] transition-colors">Preço</a>
+              </nav>
+              
+              {/* Photo Upload Field */}
+              <div className="flex items-center gap-2">
+                <label htmlFor="photo-upload" className="cursor-pointer flex items-center gap-2 px-4 py-2 bg-[#4F4F4F]/20 border border-[#D3B8AE]/30 rounded-lg hover:bg-[#D3B8AE]/10 transition-colors">
+                  <Camera className="w-4 h-4 text-[#D3B8AE]" />
+                  <span className="text-[#EDE0D4] text-sm">Adicionar Foto</span>
+                </label>
+                <input 
+                  id="photo-upload" 
+                  type="file" 
+                  accept="image/*" 
+                  className="hidden" 
+                />
+              </div>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button 
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="md:hidden text-[#EDE0D4] hover:text-[#D3B8AE] transition-colors"
+            >
+              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+
+          {/* Mobile Menu */}
+          {isMenuOpen && (
+            <div className="md:hidden py-4 border-t border-[#4F4F4F]/30">
+              <nav className="flex flex-col gap-4">
+                <a href="#curso" className="text-[#EDE0D4] hover:text-[#D3B8AE] transition-colors" onClick={() => setIsMenuOpen(false)}>Curso</a>
+                <a href="#instrutora" className="text-[#EDE0D4] hover:text-[#D3B8AE] transition-colors" onClick={() => setIsMenuOpen(false)}>Instrutora</a>
+                <a href="#depoimentos" className="text-[#EDE0D4] hover:text-[#D3B8AE] transition-colors" onClick={() => setIsMenuOpen(false)}>Depoimentos</a>
+                <a href="#preco" className="text-[#EDE0D4] hover:text-[#D3B8AE] transition-colors" onClick={() => setIsMenuOpen(false)}>Preço</a>
+                
+                {/* Mobile Photo Upload */}
+                <div className="pt-2 border-t border-[#4F4F4F]/30">
+                  <label htmlFor="photo-upload-mobile" className="cursor-pointer flex items-center gap-2 px-4 py-2 bg-[#4F4F4F]/20 border border-[#D3B8AE]/30 rounded-lg hover:bg-[#D3B8AE]/10 transition-colors w-fit">
+                    <Camera className="w-4 h-4 text-[#D3B8AE]" />
+                    <span className="text-[#EDE0D4] text-sm">Adicionar Foto</span>
+                  </label>
+                  <input 
+                    id="photo-upload-mobile" 
+                    type="file" 
+                    accept="image/*" 
+                    className="hidden" 
+                  />
+                </div>
+              </nav>
+            </div>
+          )}
+        </div>
+      </header>
+
       {/* Hero Section */}
-      <section className="relative overflow-hidden">
+      <section className="relative overflow-hidden pt-20">
         <div className="absolute inset-0 bg-gradient-to-r from-[#4F4F4F]/10 to-[#D3B8AE]/10 animate-pulse"></div>
         <div className="container mx-auto px-4 py-20 relative z-10">
-          <div className="text-center max-w-4xl mx-auto">
-            <div className="inline-flex items-center gap-2 bg-[#4F4F4F]/20 backdrop-blur-sm border border-[#D3B8AE]/30 rounded-full px-6 py-2 mb-8">
-              <Sparkles className="w-4 h-4 text-[#EDE0D4]" />
-              <span className="text-[#EDE0D4] text-sm font-medium">MÉTODO REVOLUCIONÁRIO</span>
-            </div>
-            
-            <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-[#EDE0D4] via-[#D3B8AE] to-[#FFFFFF] bg-clip-text text-transparent mb-6 leading-tight">
-              NAIL TECH
-              <br />
-              <span className="text-4xl md:text-6xl">DO FUTURO</span>
-            </h1>
-            
-            <p className="text-xl md:text-2xl text-[#EDE0D4] mb-8 leading-relaxed">
-              Transforme sua paixão por unhas em um negócio de <span className="text-[#D3B8AE] font-semibold">6 figuras</span>
-              <br />
-              com técnicas futuristas que ninguém ensina
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-              <button className="group relative bg-gradient-to-r from-[#D3B8AE] to-[#EDE0D4] hover:from-[#EDE0D4] hover:to-[#FFFFFF] text-[#000000] px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-[#D3B8AE]/25">
-                <span className="relative z-10 flex items-center gap-2">
-                  QUERO COMEÇAR AGORA
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-[#EDE0D4] to-[#FFFFFF] rounded-full blur opacity-0 group-hover:opacity-50 transition-opacity"></div>
-              </button>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
+            {/* Left Side - Nail Tech Content (2/3) */}
+            <div className="lg:col-span-2">
+              <div className="inline-flex items-center gap-2 bg-[#4F4F4F]/20 backdrop-blur-sm border border-[#D3B8AE]/30 rounded-full px-6 py-2 mb-8">
+                <Sparkles className="w-4 h-4 text-[#EDE0D4]" />
+                <span className="text-[#EDE0D4] text-sm font-medium">MÉTODO REVOLUCIONÁRIO</span>
+              </div>
               
-              <button 
-                onClick={() => setIsVideoPlaying(true)}
-                className="flex items-center gap-3 text-[#D3B8AE] hover:text-[#EDE0D4] font-semibold transition-colors group"
-              >
-                <div className="w-12 h-12 bg-[#4F4F4F]/20 backdrop-blur-sm border border-[#D3B8AE]/30 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Play className="w-5 h-5 ml-1" />
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-[#EDE0D4] via-[#D3B8AE] to-[#FFFFFF] bg-clip-text text-transparent mb-6 leading-tight">
+                NAIL TECH
+                <br />
+                <span className="text-3xl md:text-5xl lg:text-6xl">DO FUTURO</span>
+              </h1>
+              
+              <p className="text-lg md:text-xl lg:text-2xl text-[#EDE0D4] mb-8 leading-relaxed">
+                Transforme sua paixão por unhas em um negócio de <span className="text-[#D3B8AE] font-semibold">6 figuras</span>
+                <br />
+                com técnicas futuristas que ninguém ensina
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 mb-12">
+                <button className="group relative bg-gradient-to-r from-[#D3B8AE] to-[#EDE0D4] hover:from-[#EDE0D4] hover:to-[#FFFFFF] text-[#000000] px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-[#D3B8AE]/25">
+                  <span className="relative z-10 flex items-center gap-2">
+                    QUERO COMEÇAR AGORA
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#EDE0D4] to-[#FFFFFF] rounded-full blur opacity-0 group-hover:opacity-50 transition-opacity"></div>
+                </button>
+                
+                <button 
+                  onClick={() => setIsVideoPlaying(true)}
+                  className="flex items-center gap-3 text-[#D3B8AE] hover:text-[#EDE0D4] font-semibold transition-colors group"
+                >
+                  <div className="w-12 h-12 bg-[#4F4F4F]/20 backdrop-blur-sm border border-[#D3B8AE]/30 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <Play className="w-5 h-5 ml-1" />
+                  </div>
+                  Ver Demonstração
+                </button>
+              </div>
+              
+              <div className="flex flex-wrap gap-8 text-[#EDE0D4]">
+                <div className="flex items-center gap-2">
+                  <Users className="w-5 h-5 text-[#D3B8AE]" />
+                  <span>+5.000 alunas</span>
                 </div>
-                Ver Demonstração
-              </button>
+                <div className="flex items-center gap-2">
+                  <Star className="w-5 h-5 text-[#EDE0D4]" />
+                  <span>4.9/5 estrelas</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Trophy className="w-5 h-5 text-[#D3B8AE]" />
+                  <span>Método comprovado</span>
+                </div>
+              </div>
             </div>
-            
-            <div className="flex flex-wrap justify-center gap-8 text-[#EDE0D4]">
-              <div className="flex items-center gap-2">
-                <Users className="w-5 h-5 text-[#D3B8AE]" />
-                <span>+5.000 alunas</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Star className="w-5 h-5 text-[#EDE0D4]" />
-                <span>4.9/5 estrelas</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Trophy className="w-5 h-5 text-[#D3B8AE]" />
-                <span>Método comprovado</span>
+
+            {/* Right Side - Reference Image (1/3) */}
+            <div className="lg:col-span-1">
+              <div className="relative group">
+                <div className="absolute inset-0 bg-gradient-to-r from-[#D3B8AE]/20 to-[#EDE0D4]/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+                <img 
+                  src="https://k6hrqrxuu8obbfwn.public.blob.vercel-storage.com/temp/e88b3ef9-61ef-45ad-a600-01c384226d5c.png" 
+                  alt="Nail Tech do Futuro - Referência" 
+                  className="relative w-full h-auto object-cover rounded-2xl border border-[#D3B8AE]/30 hover:scale-105 transition-transform duration-300 shadow-2xl"
+                />
               </div>
             </div>
           </div>
@@ -69,7 +158,7 @@ export default function NailCoursePage() {
       </section>
 
       {/* About the Instructor Section */}
-      <section className="py-20 bg-[#4F4F4F]/10">
+      <section id="instrutora" className="py-20 bg-[#4F4F4F]/10">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#EDE0D4] to-[#D3B8AE] bg-clip-text text-transparent mb-6">
@@ -82,24 +171,48 @@ export default function NailCoursePage() {
           
           <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              {/* Photos Section */}
+              {/* Photo Upload Section */}
               <div className="space-y-6">
                 <div className="relative group">
                   <div className="absolute inset-0 bg-gradient-to-r from-[#D3B8AE]/20 to-[#EDE0D4]/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
-                  <img 
-                    src="https://k6hrqrxuu8obbfwn.public.blob.vercel-storage.com/temp/d8670d3b-3e59-4426-a51b-b1a3a33e5b83.jpg" 
-                    alt="Paleta de cores da instrutora" 
-                    className="relative w-full h-64 object-cover rounded-2xl border border-[#D3B8AE]/30 hover:scale-105 transition-transform duration-300"
-                  />
+                  <div className="relative w-full h-64 bg-[#4F4F4F]/20 backdrop-blur-sm border-2 border-dashed border-[#D3B8AE]/30 rounded-2xl flex items-center justify-center hover:border-[#D3B8AE]/50 transition-colors">
+                    <label htmlFor="instructor-photo" className="cursor-pointer flex flex-col items-center gap-4 text-center p-8">
+                      <div className="w-16 h-16 bg-[#D3B8AE]/20 rounded-full flex items-center justify-center">
+                        <Camera className="w-8 h-8 text-[#D3B8AE]" />
+                      </div>
+                      <div>
+                        <p className="text-[#FFFFFF] font-semibold mb-2">Adicione sua foto</p>
+                        <p className="text-[#EDE0D4] text-sm">Clique para fazer upload da foto da instrutora</p>
+                      </div>
+                    </label>
+                    <input 
+                      id="instructor-photo" 
+                      type="file" 
+                      accept="image/*" 
+                      className="hidden" 
+                    />
+                  </div>
                 </div>
                 
                 <div className="relative group">
                   <div className="absolute inset-0 bg-gradient-to-r from-[#EDE0D4]/20 to-[#D3B8AE]/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
-                  <img 
-                    src="https://k6hrqrxuu8obbfwn.public.blob.vercel-storage.com/temp/66a8ff0d-f82e-4bcb-b993-20d4c8c25739.jpg" 
-                    alt="Trabalhos da instrutora" 
-                    className="relative w-full h-64 object-cover rounded-2xl border border-[#EDE0D4]/30 hover:scale-105 transition-transform duration-300"
-                  />
+                  <div className="relative w-full h-64 bg-[#4F4F4F]/20 backdrop-blur-sm border-2 border-dashed border-[#EDE0D4]/30 rounded-2xl flex items-center justify-center hover:border-[#EDE0D4]/50 transition-colors">
+                    <label htmlFor="work-photo" className="cursor-pointer flex flex-col items-center gap-4 text-center p-8">
+                      <div className="w-16 h-16 bg-[#EDE0D4]/20 rounded-full flex items-center justify-center">
+                        <Camera className="w-8 h-8 text-[#EDE0D4]" />
+                      </div>
+                      <div>
+                        <p className="text-[#FFFFFF] font-semibold mb-2">Trabalhos realizados</p>
+                        <p className="text-[#EDE0D4] text-sm">Adicione fotos dos seus trabalhos</p>
+                      </div>
+                    </label>
+                    <input 
+                      id="work-photo" 
+                      type="file" 
+                      accept="image/*" 
+                      className="hidden" 
+                    />
+                  </div>
                 </div>
               </div>
               
@@ -171,7 +284,7 @@ export default function NailCoursePage() {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-20 bg-[#4F4F4F]/5">
+      <section id="curso" className="py-20 bg-[#4F4F4F]/5">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#EDE0D4] to-[#D3B8AE] bg-clip-text text-transparent mb-6">
@@ -230,7 +343,7 @@ export default function NailCoursePage() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 bg-[#000000]">
+      <section id="depoimentos" className="py-20 bg-[#000000]">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#EDE0D4] to-[#D3B8AE] bg-clip-text text-transparent mb-6">
@@ -276,7 +389,7 @@ export default function NailCoursePage() {
       </section>
 
       {/* Pricing */}
-      <section className="py-20 bg-[#4F4F4F]/5">
+      <section id="preco" className="py-20 bg-[#4F4F4F]/5">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#EDE0D4] to-[#D3B8AE] bg-clip-text text-transparent mb-6">
